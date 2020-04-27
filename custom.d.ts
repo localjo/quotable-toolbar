@@ -7,6 +7,5 @@ interface Window {
   scrollTop: number;
 }
 interface Document {
-  attachEvent: any;
   selection: any;
 }
