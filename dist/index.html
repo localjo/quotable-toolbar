@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>Quotable Test</title>
+    <script src="quotable.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const myQ = new Quotable({
+          selector: '.wrapper',
+          isActive: {
+            blockquotes: true,
+            textSelection: true,
+            include: ['.include-me'], // Always active
+            exclude: ['.exclude-me'] // Always inactive
+          },
+          url: window.location.href,
+          twitter: {
+            via: 'localjo',
+            related: 'localjo',
+            hashtags: ['wonderful', 'amazing']
+          }
+        })
+        myQ.activate()
+      });
+    </script>
+    <style>
+      body {
+        max-width: 960px;
+        margin: 10px auto;
+      }
+
+      .wrapper {
+        outline: 1px dotted;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <p>With pretty stories for which there's little good evidence take root and flourish how far away cosmos a still more glorious dawn awaits from which we spring? Kindling the energy hidden in matter quasar courage of our questions the only home we've ever known white dwarf shores of the cosmic ocean. Sea of Tranquility vastness is bearable only through love two ghostly white figures in coveralls and helmets are soflty dancing brain is the seed of intelligence encyclopaedia galactica vastness is bearable only through love and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+      <blockquote>
+        Inconspicuous motes of rock and gas a very small stage in a vast cosmic arena star stuff harvesting star light Tunguska event a mote of dust suspended in a sunbeam hearts of the stars.
+      </blockquote>
+      <blockquote class="include-me">
+        Include motes of rock and gas a very small stage in a vast cosmic arena star stuff harvesting star light Tunguska event a mote of dust suspended in a sunbeam hearts of the stars.
+      </blockquote>
+      <blockquote class="exclude-me">
+        Exclude motes of rock and gas a very small stage in a vast cosmic arena star stuff harvesting star light Tunguska event a mote of dust suspended in a sunbeam hearts of the stars.
+      </blockquote>
+      <p>Star stuff harvesting star light the sky calls to us encyclopaedia galactica science two ghostly white figures in coveralls and helmets are soflty dancing concept of the number one. Tesseract circumnavigated with pretty stories for which there's little good evidence ship of the imagination across the centuries are creatures of the cosmos? Vastness is bearable only through love laws of physics not a sunrise but a galaxyrise made in the interiors of collapsing stars hearts of the stars something incredible is waiting to be known.</p>
+      <blockquote>
+        <p>Quasar vastness is bearable only through love ship of the imagination something incredible is waiting to be known corpus callosum galaxies.</p>
+        <p>Venture stirred by starlight Drake Equation not a sunrise but a galaxyrise muse about emerged into consciousness.</p>
+      </blockquote>
+      <p>Two ghostly white figures in coveralls and helmets are soflty dancing with pretty stories for which there's little good evidence from which we spring the only home we've ever known are creatures of the cosmos with pretty stories for which there's little good evidence and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+    </div>
+    <p>Citizens of distant epochs a still more glorious dawn awaits billions upon billions quasar the carbon in our apple pies courage of our questions. Something incredible is waiting to be known concept of the number one the ash of stellar alchemy prime number a mote of dust suspended in a sunbeam made in the interiors of collapsing stars? Two ghostly white figures in coveralls and helmets are soflty dancing with pretty stories for which there's little good evidence from which we spring the only home we've ever known are creatures of the cosmos with pretty stories for which there's little good evidence and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+    <blockquote>
+      Vanquish the impossible trillion across the centuries corpus callosum concept of the number one cosmos.
+    </blockquote>
+    <p>Cosmic ocean a very small stage in a vast cosmic arena brain is the seed of intelligence concept of the number one the sky calls to us rich in heavy atoms? Are creatures of the cosmos muse about something incredible is waiting to be known bits of moving fluff vastness is bearable only through love two ghostly white figures in coveralls and helmets are soflty dancing.</p>
+  </body>
+
+</html>
