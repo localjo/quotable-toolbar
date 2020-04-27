@@ -1,4 +1,6 @@
 import { h, render } from 'preact';
+import TwitterIcon from './twitter.svg';
+import './styles.css';
 
 interface IQuotableSettings {
   selector: string;
@@ -83,7 +85,7 @@ export default class Quotable {
     }
   }
   setUpBlockquotes() {
-    const { el, settings, Toolbar } = this;
+    const { el, settings, Toolbar, wrapContents } = this;
     const { twitter, url, isActive } = settings;
     const { blockquotes: isBqActive } = isActive;
     let blockquotes: HTMLElement[] = isBqActive
@@ -108,6 +110,7 @@ export default class Quotable {
       const paragraphs = blockquote.querySelectorAll('p');
       if (paragraphs.length > 0) {
         paragraphs.forEach((paragraph) => {
+          wrapContents(paragraph, 'span', 'quotable-text');
           render(
             <Toolbar
               text={paragraph.textContent}
@@ -119,6 +122,7 @@ export default class Quotable {
           );
         });
       } else {
+        wrapContents(blockquote, 'span', 'quotable-text');
         render(
           <Toolbar
             text={blockquote.textContent}
@@ -133,8 +137,9 @@ export default class Quotable {
   }
   handleTextDeselection(e: MouseEvent) {
     const { el } = this;
-    const { classList } = e.target as HTMLElement;
-    if (!classList.contains('quotable-link')) {
+    const target = e.target as HTMLElement;
+    const isToolbarChild = !!target.closest('#quotable-toolbar');
+    if (!isToolbarChild) {
       render(null, el, el);
     }
   }
@@ -191,6 +196,12 @@ export default class Quotable {
       }
     }
   }
+  wrapContents(el: HTMLElement, wrapper: string, className: string) {
+    const span = document.createElement(wrapper);
+    span.classList.add(className);
+    span.innerHTML = el.innerHTML;
+    el.innerHTML = span.outerHTML;
+  }
   getSelectedText(): any {
     let range, textSelection;
     if (window.getSelection) {
@@ -211,6 +222,15 @@ export default class Quotable {
   Toolbar(props: IToolbarProps) {
     const { text, style, twitter, url } = props;
     const isFloat = style && (style.top || style.left);
+    const instanceStyle = {
+      ...style,
+      textDecoration: 'none',
+      ...(isFloat
+        ? {
+            transform: 'translate(-50%, -100%)',
+          }
+        : {}),
+    };
     let href = '';
     if (twitter) {
       const { hashtags, related, via } = twitter;
@@ -229,18 +249,19 @@ export default class Quotable {
       href = `http://twitter.com/intent/tweet?${query}`;
     }
     return (
-      <span
-        className={`quotable-link${isFloat ? ' quotable-link-floating' : ''}`}
-      >
+      <span id={`${isFloat ? 'quotable-toolbar' : ''}`} style={instanceStyle}>
         <a
+          class="quotable-link"
           href={href}
-          style={style}
           onMouseOver={
             !isFloat
               ? (e: MouseEvent) => {
                   const target = e.target as HTMLElement;
                   const parent = target.closest('blockquote, p') as HTMLElement;
-                  parent.style.background = 'rgba(100,100,100,0.1)';
+                  const wrapper = parent.querySelector(
+                    '.quotable-text'
+                  ) as HTMLElement;
+                  wrapper.style.background = 'rgba(100,100,100,0.1)';
                 }
               : () => {}
           }
@@ -249,12 +270,23 @@ export default class Quotable {
               ? (e: MouseEvent) => {
                   const target = e.target as HTMLElement;
                   const parent = target.closest('blockquote, p') as HTMLElement;
-                  parent.style.background = null;
+                  const wrapper = parent.querySelector(
+                    '.quotable-text'
+                  ) as HTMLElement;
+                  wrapper.style.background = null;
                 }
               : () => {}
           }
         >
-          tweet!
+          <TwitterIcon
+            style={{
+              width: '1em',
+              height: '1em',
+              lineHeight: '1em',
+              fill: 'currentColor',
+              margin: isFloat ? '0' : '0 0.2em',
+            }}
+          />
         </a>
       </span>
     );

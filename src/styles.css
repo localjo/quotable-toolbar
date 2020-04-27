@@ -1,0 +1,58 @@
+#quotable-toolbar, .quotable-link {
+  text-decoration: none;
+  height: 1em;
+}
+
+.quotable-link:hover {
+  text-decoration: none;
+}
+
+#quotable-toolbar {
+  display: block;
+  padding: 5px 10px;
+  line-height: 1.5em;
+  text-align: center;
+  text-decoration: none;
+  background: #eeeeee;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+/* Caret */
+
+#quotable-toolbar:after, #quotable-toolbar:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Caret background */
+
+#quotable-toolbar:after {
+  border-color: rgba(238, 238, 238, 0);
+  border-top-color: #eeeeee;
+  border-width: 6px;
+  margin-left: -6px;
+}
+
+/* Caret border */
+
+#quotable-toolbar:before {
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: rgba(0, 0, 0, 0.3);
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+.quotable-link {
+  font-style: normal;
+  text-decoration: none !important;
+  border: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
