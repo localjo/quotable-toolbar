@@ -1,6 +1,6 @@
 {
   "name": "quotable-toolbar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library to add Medium-like share menu to selected text and quotes",
   "main": "dist/quotable.js",
   "module": "dist/quotable.es.js",
