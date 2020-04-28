@@ -1,7 +1,7 @@
 {
   "name": "quotable-toolbar",
   "version": "1.0.0",
-  "description": "A library for adding a social media sharing toolbar to webpages",
+  "description": "A library to add Medium-like share menu to selected text and quotes",
   "main": "dist/quotable.js",
   "module": "dist/quotable.es.js",
   "files": [
@@ -14,7 +14,12 @@
     "watch": "rollup -cw"
   },
   "keywords": [
-    "social"
+    "social",
+    "twitter",
+    "sharing",
+    "social media",
+    "medium",
+    "typescript"
   ],
   "author": "Jo Sprague <josiah.sprague@gmail.com>",
   "license": "MIT",

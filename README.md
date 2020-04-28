@@ -1,12 +1,14 @@
 # `quotable-toolbar` 📢
 
-> A library for adding a social media sharing toolbar to webpages
+> A library to add Medium-like share menu to selected text and quotes
 
 ![Screenshot](./images/screenshot1.png)
 ![Screenshot](./images/screenshot2.png)
 ![Screenshot](./images/screenshot3.png)
 
 [![NPM](https://img.shields.io/npm/v/quotable-toolbar.svg)](https://www.npmjs.com/package/quotable-toolbar)
+
+Quotable allows you to easily add a contextual popup to your web page for sharing selected text and quotes on Twitter (and soon, other networks).
 
 ## Install
 
