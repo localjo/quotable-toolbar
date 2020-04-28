@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "commonjs",
@@ -7,5 +9,7 @@
     "jsx": "react",
     "jsxFactory": "h",
     "allowJs": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

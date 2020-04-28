@@ -2,14 +2,20 @@
   "name": "quotable-toolbar",
   "version": "1.0.0",
   "description": "A library for adding a social media sharing toolbar to webpages",
-  "main": "dist/main.js",
-  "module": "src/index.tsx",
+  "main": "dist/quotable.js",
+  "module": "dist/quotable.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "build:watch": "webpack --watch",
+    "build": "rollup -c",
+    "watch": "rollup -cw",
+    "wp": "webpack",
+    "wp:watch": "webpack --watch",
     "start": "webpack-dev-server --open",
-    "dev": "yarn build:watch && yarn start"
+    "dev": "yarn wp:watch && yarn start"
   },
   "keywords": [
     "social"
@@ -17,8 +23,13 @@
   "author": "Jo Sprague <josiah.sprague@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
     "css-loader": "^3.5.3",
     "react-svg-loader": "^3.0.3",
+    "rollup": "^2.7.3",
+    "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-typescript2": "^0.27.0",
     "style-loader": "^1.2.0",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",

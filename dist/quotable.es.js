@@ -1,6 +1,4 @@
-'use strict';
-
-var preact = require('preact');
+import { render, h } from 'preact';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -121,12 +119,12 @@ var Quotable = /** @class */ (function () {
             if (paragraphs.length > 0) {
                 paragraphs.forEach(function (paragraph) {
                     wrapContents(paragraph, 'span', 'quotable-text');
-                    preact.render(preact.h(Toolbar, { text: paragraph.textContent, url: url, twitter: twitter ? twitter : null }), paragraph, paragraph);
+                    render(h(Toolbar, { text: paragraph.textContent, url: url, twitter: twitter ? twitter : null }), paragraph, paragraph);
                 });
             }
             else {
                 wrapContents(blockquote, 'span', 'quotable-text');
-                preact.render(preact.h(Toolbar, { text: blockquote.textContent, url: url, twitter: twitter ? twitter : null }), blockquote, blockquote);
+                render(h(Toolbar, { text: blockquote.textContent, url: url, twitter: twitter ? twitter : null }), blockquote, blockquote);
             }
         });
     };
@@ -135,7 +133,7 @@ var Quotable = /** @class */ (function () {
         var target = e.target;
         var isToolbarChild = !!target.closest('#quotable-toolbar');
         if (!isToolbarChild) {
-            preact.render(null, el, el);
+            render(null, el, el);
         }
     };
     Quotable.prototype.handleTextSelection = function () {
@@ -152,7 +150,7 @@ var Quotable = /** @class */ (function () {
                 left: left + (right - left) / 2,
                 position: 'absolute',
             };
-            preact.render(preact.h(Toolbar, { text: text, url: url, style: style, twitter: twitter ? twitter : null }), el, el);
+            render(h(Toolbar, { text: text, url: url, style: style, twitter: twitter ? twitter : null }), el, el);
         }
     };
     Quotable.prototype.handleTwitterIntent = function (e) {
@@ -216,8 +214,8 @@ var Quotable = /** @class */ (function () {
                 .join('&');
             href = "http://twitter.com/intent/tweet?" + query;
         }
-        return (preact.h("span", { id: "" + (isFloat ? 'quotable-toolbar' : ''), style: instanceStyle },
-            preact.h("a", { class: "quotable-link", href: href, onMouseOver: !isFloat
+        return (h("span", { id: "" + (isFloat ? 'quotable-toolbar' : ''), style: instanceStyle },
+            h("a", { class: "quotable-link", href: href, onMouseOver: !isFloat
                     ? function (e) {
                         var target = e.target;
                         var parent = target.closest('blockquote, p');
@@ -232,7 +230,7 @@ var Quotable = /** @class */ (function () {
                         wrapper.style.background = null;
                     }
                     : function () { } },
-                preact.h("div", { style: {
+                h("div", { style: {
                         display: 'inline-block',
                         width: '1em',
                         height: '1em',
@@ -246,4 +244,4 @@ var Quotable = /** @class */ (function () {
     return Quotable;
 }());
 
-module.exports = Quotable;
+export default Quotable;
