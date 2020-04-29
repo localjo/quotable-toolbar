@@ -52,9 +52,14 @@
 }
 
 .quotable-link {
-  font-style: normal;
+  display: inline-block;
+  height: 1.2em;
   text-decoration: none !important;
   border: 0 !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+}
+
+#quotable-toolbar .quotable-link {
+  background: none !important;
 }
