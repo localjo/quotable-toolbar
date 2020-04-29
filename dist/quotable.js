@@ -55,7 +55,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "#quotable-toolbar, .quotable-link {\n  text-decoration: none;\n  height: 1em;\n}\n\n.quotable-link:hover {\n  text-decoration: none;\n}\n\n#quotable-toolbar {\n  display: block;\n  padding: 5px 10px;\n  line-height: 1.5em;\n  text-align: center;\n  text-decoration: none;\n  background: #eeeeee;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  box-sizing: content-box;\n}\n\n/* Caret */\n\n#quotable-toolbar:after, #quotable-toolbar:before {\n  top: 100%;\n  left: 50%;\n  border: solid transparent;\n  content: \" \";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n}\n\n/* Caret background */\n\n#quotable-toolbar:after {\n  border-color: rgba(238, 238, 238, 0);\n  border-top-color: #eeeeee;\n  border-width: 6px;\n  margin-left: -6px;\n}\n\n/* Caret border */\n\n#quotable-toolbar:before {\n  border-color: rgba(0, 0, 0, 0);\n  border-top-color: rgba(0, 0, 0, 0.3);\n  border-width: 7px;\n  margin-left: -7px;\n}\n\n.quotable-link {\n  font-style: normal;\n  text-decoration: none !important;\n  border: 0 !important;\n  -webkit-box-shadow: none !important;\n  box-shadow: none !important;\n}";
+var css_248z = "#quotable-toolbar, .quotable-link {\n  text-decoration: none;\n  height: 1em;\n}\n\n.quotable-link:hover {\n  text-decoration: none;\n}\n\n#quotable-toolbar {\n  display: block;\n  padding: 5px 10px;\n  line-height: 1.5em;\n  text-align: center;\n  text-decoration: none;\n  background: #eeeeee;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  box-sizing: content-box;\n  white-space: nowrap;\n}\n\n/* Caret */\n\n#quotable-toolbar:after, #quotable-toolbar:before {\n  top: 100%;\n  left: 50%;\n  border: solid transparent;\n  content: \" \";\n  height: 0;\n  width: 0;\n  position: absolute;\n  pointer-events: none;\n}\n\n/* Caret background */\n\n#quotable-toolbar:after {\n  border-color: rgba(238, 238, 238, 0);\n  border-top-color: #eeeeee;\n  border-width: 6px;\n  margin-left: -6px;\n}\n\n/* Caret border */\n\n#quotable-toolbar:before {\n  border-color: rgba(0, 0, 0, 0);\n  border-top-color: rgba(0, 0, 0, 0.3);\n  border-width: 7px;\n  margin-left: -7px;\n}\n\n.quotable-link {\n  font-style: normal;\n  text-decoration: none !important;\n  border: 0 !important;\n  -webkit-box-shadow: none !important;\n  box-shadow: none !important;\n}";
 styleInject(css_248z);
 
 var Quotable = /** @class */ (function () {
@@ -76,9 +76,15 @@ var Quotable = /** @class */ (function () {
     }
     Quotable.prototype.activate = function () {
         var _a = this, el = _a.el, settings = _a.settings, setUpBlockquotes = _a.setUpBlockquotes, handleTextSelection = _a.handleTextSelection, handleTextDeselection = _a.handleTextDeselection, handleTwitterIntent = _a.handleTwitterIntent;
-        var twitter = settings.twitter, isActive = settings.isActive;
+        var twitter = settings.twitter, isActive = settings.isActive, selector = settings.selector;
         setUpBlockquotes.bind(this)();
         if (isActive.textSelection) {
+            var elPosition = window.getComputedStyle(el).position;
+            var validPositions = ['relative', 'fixed', 'absolute'];
+            if (!validPositions.includes(elPosition)) {
+                console.warn("Forcing element '" + selector + "' to position: relative. The Quotable container element should have position set to one of: [" + validPositions.join(',') + "] with CSS to avoid this warning.");
+                el.style.position = 'relative';
+            }
             el.addEventListener('mouseup', handleTextSelection);
             document.addEventListener('mousedown', handleTextDeselection);
         }
@@ -144,12 +150,10 @@ var Quotable = /** @class */ (function () {
         var selection = getSelectedText();
         if (selection && selection.text !== '') {
             var text = selection.text, top_1 = selection.top, left = selection.left, right = selection.right;
-            var scrollTop = window.scrollY ||
-                window.scrollTop ||
-                document.getElementsByTagName('html')[0].scrollTop;
+            var rect = el.getBoundingClientRect();
             var style = {
-                top: top_1 + scrollTop - 10,
-                left: left + (right - left) / 2,
+                top: top_1 - rect.top - 10,
+                left: (left + right) / 2 - rect.left,
                 position: 'absolute',
             };
             preact.render(preact.h(Toolbar, { text: text, url: url, style: style, twitter: twitter ? twitter : null }), el, el);

@@ -57,9 +57,19 @@ export default class Quotable {
       handleTextDeselection,
       handleTwitterIntent,
     } = this;
-    const { twitter, isActive } = settings;
+    const { twitter, isActive, selector } = settings;
     setUpBlockquotes.bind(this)();
     if (isActive.textSelection) {
+      const elPosition = window.getComputedStyle(el).position;
+      const validPositions = ['relative', 'fixed', 'absolute'];
+      if (!validPositions.includes(elPosition)) {
+        console.warn(
+          `Forcing element '${selector}' to position: relative. The Quotable container element should have position set to one of: [${validPositions.join(
+            ','
+          )}] with CSS to avoid this warning.`
+        );
+        el.style.position = 'relative';
+      }
       el.addEventListener('mouseup', handleTextSelection);
       document.addEventListener('mousedown', handleTextDeselection);
     }
@@ -148,13 +158,10 @@ export default class Quotable {
     const selection = getSelectedText();
     if (selection && selection.text !== '') {
       const { text, top, left, right } = selection;
-      const scrollTop =
-        window.scrollY ||
-        window.scrollTop ||
-        document.getElementsByTagName('html')[0].scrollTop;
+      const rect = el.getBoundingClientRect();
       const style = {
-        top: top + scrollTop - 10,
-        left: left + (right - left) / 2,
+        top: top - rect.top - 10,
+        left: (left + right) / 2 - rect.left,
         position: 'absolute',
       };
       render(

@@ -17,6 +17,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-sizing: content-box;
+  white-space: nowrap;
 }
 
 /* Caret */
