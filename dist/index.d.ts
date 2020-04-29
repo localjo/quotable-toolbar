@@ -23,7 +23,7 @@ interface IToolbarProps {
 interface ITwitterOptions {
     via?: string;
     related?: string;
-    hashtags?: [];
+    hashtags?: string[];
 }
 export default class Quotable {
     settings: IQuotableSettings;

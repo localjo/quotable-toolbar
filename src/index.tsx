@@ -24,7 +24,7 @@ interface IToolbarProps {
 interface ITwitterOptions {
   via?: string;
   related?: string;
-  hashtags?: [];
+  hashtags?: string[];
 }
 interface IStringDictionary {
   [key: string]: string;
