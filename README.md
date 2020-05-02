@@ -1,14 +1,14 @@
 # `quotable-toolbar` 📢
 
-> A library to add Medium-like share menu to selected text and quotes
+> A library to add buttons to quotes and text selection that make it quick and easy for your readers to share quotes from your website.
 
-![Screenshot](./images/screenshot1.png)
-![Screenshot](./images/screenshot2.png)
-![Screenshot](./images/screenshot3.png)
+![Banner Image](./images/banner-1544x500.png)
 
 [![NPM](https://img.shields.io/npm/v/quotable-toolbar.svg)](https://www.npmjs.com/package/quotable-toolbar)
 
-Quotable allows you to easily add a contextual popup to your web page for sharing selected text and quotes on Twitter (and soon, other networks).
+Quotable is a TypeScript library (distributed as a browser bundle and an ES6 module) that allows you to easily add a contextual popup to your web page for sharing selected text and quotes on Twitter (and soon, other networks).
+
+Quotable is also available [as a WordPress plugin](https://wordpress.org/plugins/quotable/).
 
 ## Install
 
@@ -68,12 +68,18 @@ Quotable has two separate features you can activate, 1) add sharing links to blo
 
 Quotable will search for every blockquote in the container you select, and append a sharing link. If the blockquote contains paragraphs, the sharing link will be appended to each paragraph. Quotable also wraps the text content of the paragraph or blockquote with a span, used to highlight the text when the sharing link is hovered. You can also selectively add the sharing link to blockquotes by setting `isActive.blockquotes: false` and passing an array to `include` of selectors for elements you want to add sharing link to. Alternatively, you can selectively deactivate the sharing link when `isActive.blockquotes: true` by passing an array to `exclude` of selectors for the elements you _don't_ want to add a sharing link to.
 
+![Screenshot](./images/screenshot-1.png)
+
 ### Text Selection
 
 Quotable adds a popup for every text selection within the container you select. You can disable this with `isActive.textSelection: false`
+
+![Screenshot](./images/screenshot-2.png)
 
 ### Sharing Links
 
 The `url` option determines which url will be shared, when the user clicks a sharing link. You can use `window.location.href`, but if that's not necessarily the canonical url you want people to share, you should set this manually with that value.
 
 Right now, Quotable has support for a link to share content on Twitter. You can configure Twitter sharing options with the `twitter` options object. In the future, support will be added for other networks (Facebook, Reddit, Hacker News, etc), and each option will have it's own settings key in the options object.
+
+![Screenshot](./images/screenshot-3.png)
